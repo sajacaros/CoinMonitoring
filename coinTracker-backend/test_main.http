@@ -1,0 +1,39 @@
+# test_main.http
+
+# API Base URL 변수 설정 (FastAPI 기본 포트인 8000으로 가정)
+@baseUrl = http://localhost:8000/api
+
+###
+# 1. Health Check
+# API 서버가 정상적으로 응답하는지 확인합니다.
+GET {{baseUrl}}/health
+Accept: application/json
+
+###
+# 2. Get All Available Markets
+# 데이터베이스에 저장된 모든 고유 마켓 목록을 가져옵니다.
+GET {{baseUrl}}/markets
+Accept: application/json
+
+###
+# 3. Get Candle Chart Data for a Specific Market
+# 특정 마켓(예: KRW-BTC)의 최근 캔들 차트 데이터를 가져옵니다.
+# URL의 "KRW-BTC" 부분은 실제 존재하는 마켓 코드로 변경하여 테스트하세요.
+# limit 파라미터로 가져올 데이터 개수를 조절할 수 있습니다 (기본값: 120).
+GET {{baseUrl}}/chart-data/KRW-BTC?limit=100
+Accept: application/json
+
+###
+# 4. Get Bollinger Band Events for a Specific Market
+# 특정 마켓(예: KRW-BTC)의 최근 볼린저 밴드 이벤트 목록을 가져옵니다.
+# URL의 "KRW-BTC" 부분은 실제 존재하는 마켓 코드로 변경하여 테스트하세요.
+# limit 파라미터로 가져올 이벤트 개수를 조절할 수 있습니다 (기본값: 20).
+GET {{baseUrl}}/events/KRW-ETH?limit=10
+Accept: application/json
+
+###
+# 5. Get Candle Chart Data for another market (if available)
+# 다른 마켓(예: KRW-ETH)의 차트 데이터를 테스트합니다.
+# 이 요청은 /api/markets 응답에 "KRW-ETH"와 같은 마켓이 있을 경우 유효합니다.
+GET {{baseUrl}}/chart-data/KRW-ETH
+Accept: application/json

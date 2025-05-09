@@ -1,0 +1,64 @@
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 1.8em;
+}
+
+.controls {
+  margin-top: 15px;
+}
+
+.controls label {
+  margin-right: 10px;
+  font-size: 1em;
+}
+
+.controls select {
+  padding: 8px 12px;
+  font-size: 1em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.chart-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.loading-message,
+.error-message {
+  margin: 20px;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.loading-message {
+  color: #007bff;
+  background-color: #e7f3ff;
+  border: 1px solid #b3d7ff;
+}
+
+.error-message {
+  color: #d8000c;
+  background-color: #ffd2d2;
+  border: 1px solid #ffb8b8;
+}
+
+/* EventPopup.css 에서 스타일 관리 */
