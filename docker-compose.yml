@@ -5,7 +5,7 @@ services:
     build:
       context: ./coinTracker-backend # Dockerfile이 있는 경로
       dockerfile: Dockerfile
-    image: sajacaros/cointracker-backend:0.0.3
+    image: sajacaros/cointracker-backend:0.0.4
     container_name: cointracker_backend
     ports:
       - "8222:8000"
@@ -19,12 +19,12 @@ services:
     build:
       context: ./coinTracker-frontend
       dockerfile: Dockerfile
-      args:
-        REACT_APP_API_BASE_URL: ${API_BASE_URL}
-    image: sajacaros/cointracker-frontend:0.0.3
+    image: sajacaros/cointracker-frontend:0.0.4
     container_name: cointracker_frontend
     ports:
       - "8333:80"
+    environment:
+      - REACT_APP_API_BASE_URL=${API_BASE_URL}
     env_file:
       - ./.env
     depends_on:
