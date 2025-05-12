@@ -5,13 +5,15 @@ services:
     build:
       context: ./coinTracker-backend # Dockerfile이 있는 경로
       dockerfile: Dockerfile
-    image: sajacaros/cointracker-backend:0.0.1
+    image: sajacaros/cointracker-backend:0.0.2
     container_name: cointracker_backend
     ports:
       - "8222:8000"
     env_file:
       - ./.env
     restart: unless-stopped # 컨테이너 비정상 종료 시 재시작 (systemd의 always와 유사)
+    networks:
+      - app-network
 
   ui:
     build:
@@ -19,10 +21,15 @@ services:
       dockerfile: Dockerfile
       args:
         REACT_APP_API_BASE_URL: http://cointracker:8000
-    image: sajacaros/cointracker-frontend:0.0.1
+    image: sajacaros/cointracker-frontend:0.0.2
     container_name: cointracker_frontend
     ports:
       - "8333:80"
     depends_on:
       - cointracker
     restart: unless-stopped
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
