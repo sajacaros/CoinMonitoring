@@ -5,7 +5,7 @@ import EventToast from "./components/EventToast";
 import "./App.css";
 
 // 백엔드 API의 기본 URL을 설정합니다.
-const BASE_URL = "http://localhost:8000"; // 실제 API 주소로 변경해주세요.
+const BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000";
 const CHART_DATA_LIMIT = 120; // 한 번에 가져올 차트 데이터 개수
 const EVENT_DATA_LIMIT = 20; // 한 번에 가져올 이벤트 데이터 개수
 const POLLING_INTERVAL = 10000; // 데이터 폴링 간격 (10초)

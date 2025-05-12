@@ -1,0 +1,28 @@
+version: "3.8" # Docker Compose 파일 형식 버전
+
+services:
+  cointracker:
+    build:
+      context: ./coinTracker-backend # Dockerfile이 있는 경로
+      dockerfile: Dockerfile
+    image: sajacaros/cointracker-backend:latest
+    container_name: cointracker_backend
+    ports:
+      - "8222:8000"
+    env_file:
+      - ./.env
+    restart: unless-stopped # 컨테이너 비정상 종료 시 재시작 (systemd의 always와 유사)
+
+  ui:
+    build:
+      context: ./coinTracker-frontend
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_BASE_URL: http://localhost:8222
+    image: sajacaros/cointracker-frontend:latest
+    container_name: cointracker_frontend
+    ports:
+      - "8333:80"
+    depends_on:
+      - cointracker
+    restart: unless-stopped

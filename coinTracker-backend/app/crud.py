@@ -5,7 +5,21 @@ from typing import List
 
 
 def get_distinct_markets(db: Session) -> List[str]:
-    results = db.query(models.MinutesCandleInfo.market).distinct().order_by(models.MinutesCandleInfo.market).all()
+    subquery = (
+        db.query(models.MinutesCandleInfo.market)
+        .order_by(desc(models.MinutesCandleInfo.candle_date_time_kst))  # 최신 데이터가 먼저 오도록 내림차순 정렬
+        .limit(10000)
+        .subquery('recent_market_entries')  # 서브쿼리에 별칭 부여
+    )
+
+    # 2. 서브쿼리의 결과에서 고유한 'market' 값을 조회하고 정렬합니다.
+    results = (
+        db.query(subquery.c.market)  # 서브쿼리로부터 'market' 컬럼 선택
+        .distinct()
+        .order_by(subquery.c.market)  # 고유한 시장 이름을 알파벳 순으로 정렬
+        .all()
+    )
+
     return [result[0] for result in results]
 
 def get_candles_for_chart(db: Session, market: str, limit: int = 120) -> List[schemas.CandleChartData]:
