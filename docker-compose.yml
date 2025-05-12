@@ -5,7 +5,7 @@ services:
     build:
       context: ./coinTracker-backend # Dockerfile이 있는 경로
       dockerfile: Dockerfile
-    image: sajacaros/cointracker-backend:0.0.4
+    image: sajacaros/cointracker-backend:0.0.5
     container_name: cointracker_backend
     ports:
       - "8222:8000"
@@ -19,7 +19,7 @@ services:
     build:
       context: ./coinTracker-frontend
       dockerfile: Dockerfile
-    image: sajacaros/cointracker-frontend:0.0.4
+    image: sajacaros/cointracker-frontend:0.0.5
     container_name: cointracker_frontend
     ports:
       - "8333:80"
